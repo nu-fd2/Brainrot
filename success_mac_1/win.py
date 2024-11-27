@@ -29,39 +29,47 @@ def show_image_and_play_audio(image_file, audio_file):
     audio_thread.daemon = True  # Make thread daemon so it terminates with main program
     audio_thread.start()
 
+    def close_on_enter(event):
+        if event.keysym == 'Return':
+            root.destroy()
+    
+    root.bind('<Return>', close_on_enter)
+
+    label = tk.Label(root, text="Press Enter to close")
+    label.pack()
+    
     # Schedule window destruction
-    root.after(4000, lambda: root.quit())
+    # root.after(4000, lambda: root.quit())
     
     root.mainloop()
 
-question = "what is your skin color?[black/white] "
-correct_answer = "white"
-user_answer = input(f"{question}")
-if user_answer != correct_answer:
-    show_image_and_play_audio("cat.png", "cataudio.mp3")
-else:
-    show_image_and_play_audio("yippee-happy.gif", "yippeeeee.mp3")
 
-question = "do you hate jews?[yes/no] "
-correct_answer = "yes"
-user_answer = input(f"{question}")
-if user_answer != correct_answer:
-    show_image_and_play_audio("cat.png", "cataudio.mp3")
-else:
-    show_image_and_play_audio("yippee-happy.gif", "yippeeeee.mp3")
 
-question = "was 9/11 an inside job?[yes/no] "
-correct_answer = "yes"
-user_answer = input(f"{question}")
-if user_answer != correct_answer:
-    show_image_and_play_audio("cat.png", "cataudio.mp3")
-else:
-    show_image_and_play_audio("yippee-happy.gif", "yippeeeee.mp3")
 
-question = "ar u gei?[yes/no] "
-correct_answer = "no"
-user_answer = input(f"{question}")
-if user_answer != correct_answer:
+    
+
+def cat():
     show_image_and_play_audio("cat.png", "cataudio.mp3")
+
+def yipeee():
+    show_image_and_play_audio("yipee.png", "yippeeeee.mp3")
+
+if input(f"what is your skin color?[black/white] ")!= "white":
+    cat()
 else:
-    show_image_and_play_audio("yippee-happy.gif", "yippeeeee.mp3")
+    yipeee()
+
+if input(f"do you hate jews?[yes/no] ") != "yes":
+    cat()
+else:
+    yipeee()
+
+if input(f"was 9/11 an inside job?[yes/no] ") != "yes":
+    cat()
+else:
+    yipeee()
+
+if input(f"do u support LGTVQ+?[yes/no] ") != "no":
+    cat()
+else:
+    yipeee()
